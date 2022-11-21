@@ -15,6 +15,7 @@ int NumOfDigit(int num)
     }
     return number;
 }
+
 int isArmstrong(int x)
 {
     if (x > 0)
