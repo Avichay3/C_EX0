@@ -24,8 +24,7 @@ int isArmstrong(int a)
         return 0;
     }
 }
-/*
-int isPalindrome(int){
 
+int isPalindrome(int){
+    return 0;
 }
-*/
