@@ -3,9 +3,9 @@
 #include <stdlib.h>
 #include "NumClass.h"
 
-int isArmstrong(int a)
+int isArmstrong(int a, int nDigits)
 {
-    int nDigits = floor(log10(abs(a))) + 1;
+    nDigits = floor(log10(abs(a))) + 1;
     int sum = 0;
     int num = a;
     int mod = num;
@@ -24,8 +24,25 @@ int isArmstrong(int a)
         return 0;
     }
 }
-/*
-int isPalindrome(int){
+
+
+int isPalindrome(int num){
+int reminder , sum = 0;
+int temp = num;
+while (num > 0)
+{
+    reminder = num % 10;
+    sum = (sum*10) + reminder;
+    num = num / 10;
+}
+if (temp == sum)
+{
+    printf("the number %d is a palindrome", num);
+}
+else{
+     return printf("the number %d is not a palindrome", num);
+}
+
+
 
 }
-*/
