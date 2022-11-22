@@ -1,30 +1,45 @@
 CC = gcc
 AR = ar
 CFLAGS = -g -Wall
-OBJECTS_LOOP_BASIC = basicClassification.o advancedClassificationLoop.o NumClass.h
-OBJECTS_RECURSIVE_BASIC = basicClassification.o advancedClassificationRecursion.o NumClass.h
+OBJECTS_LOOP_BASIC = basicClassification.o advancedClassificationLoop.o
+OBJECTS_RECURSIVE_BASIC = basicClassification.o advancedClassificationRecursion.o
 
 all: recursived recursives loopd loops mains maindloop maindrec
-maindrec: $(OBJECTS_RECURSIVE_BASIC) recursived
-	$(CC) $(FLAGS) -o maindloop $(OBJECTS_RECURSIVE_BASIC) recursives
 
-maindloop: $(OBJECTS_LOOP_BASIC) loopd
-	$(CC) $(FLAGS) -o maindloop $(OBJECTS_LOOP_BASIC) loops
+maindrec: main.o recursived
+	$(CC) $(FLAGS) -o maindloop $(OBJECTS_RECURSIVE_BASIC) recursives -lm
 
-mains: $(OBJECTS_RECURSIVE_BASIC) recursives
-	$(CC) $(FLAGS) -o mains  $(OBJECTS_RECURSIVE_BASIC) recursives
+maindloop: main.o loopd
+	$(CC) $(FLAGS) -o maindloop $(OBJECTS_LOOP_BASIC) loops -lm
+
+mains: main.o recursives
+	$(CC) $(FLAGS) -o mains  $(OBJECTS_RECURSIVE_BASIC) recursives -lm
 
 loops: $(OBJECTS_LOOP_BASIC)
 	$(AR) -rcs libclassloops.a $(OBJECTS_LOOP_BASIC)
 
 loopd: $(OBJECTS_LOOP_BASIC)
-	$(CC) -shared -o libclssloops.so $(OBJECTS_LOOP_BASIC)
+	$(CC) -fPIC -shared $(OBJECTS_LOOP_BASIC) -o libclssloops.so 
 
 recursives: $(OBJECTS_RECURSIVE_BASIC)
 	$(AR) -rcs libclassrec.a $(OBJECTS_RECURSIVE_BASIC)
 
 recursived: $(OBJECTS_RECURSIVE_BASIC)
-	$(CC) -shared -o libclassrec.so $(OBJECTS_RECURSIVE_BASIC)
+	$(CC) -fPIC -shared $(OBJECTS_RECURSIVE_BASIC) -o libclassrec.so 
+
+main.o: main.c NumClass.h
+	$(CC) $(CFLAGS) main.c -c
+
+basicClassification.o: basicClassification.c NumClass.h
+	$(CC) $(CFLAGS) basicClassification.c -c 
+
+advancedClassificationLoop.o: advancedClassificationLoop.c NumClass.h
+	$(CC) $(CFLAGS) advancedClassificationLoop.c -c
+
+advancedClassificationRecursion.o: advancedClassificationRecursion.c NumClass.h
+	$(CC) $(CFLAGS) advancedClassificationRecursion.c -c
+
+.PHONY: clean loops loopd reccursived reccursives
 
 make clean:
-	rm -f *.o
+	rm -f *.o *.a *so

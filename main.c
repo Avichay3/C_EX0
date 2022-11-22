@@ -1,8 +1,50 @@
 #include <stdio.h>
 #include <math.h>
 #include "NumClass.h"
-void main()
+int main()
 {
-    // printf("1 for prime and 0 for not prime\n%d", isPrime(7));
-    printf("1 is armstrong and 0 is not: %d\n", isArmstrong(9474));
-}
+    int start, end;
+    printf("Enter the start number please: \n");
+    scanf("%d", &start);
+    printf("Enter the end number please: \n");
+    scanf("%d", &end);
+
+    printf("The Armstrong numbers bewteen the range are: \n");
+    if(start<end){
+    for (int i = start; i <= end; i++)
+    {
+        isArmstrong(i, (floor(log10(i)) + 1));
+        //if(i==isArmstrong(i, (floor(log10(i)) + 1)))
+       // {
+       //     printf("%d", i);
+        //}
+    }
+    /*    
+    printf("The Strong numbers bewteen the range are: \n");
+    for (int i = x; i <= y; i++)
+    {
+        if(i==isStrong(i))
+        {
+            printf(" %d", i);
+        }
+    }
+    printf("The Prime numbers bewteen the range are: \n");
+    for (int i = x; i <= y; i++)
+    {
+        if(isPrime(i)==1)
+        {
+            printf(" %d", i);
+        }
+    }
+    printf("The Palindrome numbers bewteen the range are: \n");
+    for (int i = x; i <= y; i++)
+    {
+        if(i==isPalindrome(i))
+        {
+            printf(" %d", i);
+        }
+    }
+        */
+    }
+       return 0;
+    }
